@@ -7,6 +7,8 @@ import com.rallydev.rest.util.Fetch
 import com.rallydev.rest.util.QueryFilter
 
 import static org.sbelei.rally.QueryHelper.*;
+import org.sbelei.rally.domain.State;
+import org.sbelei.rally.domain.Type;
 
 class RestCalls {
 	
@@ -16,20 +18,29 @@ class RestCalls {
 				Credentials.USER,
 				Credentials.PASSWORD);
 			
-		QueryRequest defectRequest = new QueryRequest("defect");
-	
-		defectRequest.setFetch(new Fetch("FormattedID", "Name", "State", "Priority"));
-		defectRequest.setFetch(new Fetch("State"));
-		defectRequest.setQueryFilter(excludeByStates(SUBMITTED,CLOSED,FIXED));
-//		defectRequest.setQueryFilter(filterByOwner(Credentials.USER));
-		defectRequest.setOrder("Priority ASC,FormattedID ASC");
-	
-		defectRequest.setPageSize(25);
-		defectRequest.setLimit(100);
-	
-		QueryResponse queryResponse = restApi.query(defectRequest);
-
+		QueryRequest request = new QueryRequest("workspace");
+		
+		QueryResponse queryResponse = restApi.query(request);
+		
 		println(queryResponse.getResults());
+	}
+
+	/*
+	 * QueryResponse queryResponse = sampleGetDefects(restApi);
+	 */
+	private static QueryResponse sampleGetDefects(RallyRestApi restApi) {
+		QueryRequest request = new QueryRequest(Type.DEFECT);
+
+		request.setFetch(new Fetch("FormattedID", "Name", "State", "Priority"));
+		request.setQueryFilter(includeByStates(State.SUBMITTED, State.FIXED));
+		request.setQueryFilter(includeByOwner(Credentials.USER));
+		request.setOrder("Priority ASC,FormattedID ASC");
+
+		request.setPageSize(25);
+		request.setLimit(100);
+
+		QueryResponse queryResponse = restApi.query(request)
+		return queryResponse
 	}
 
 }

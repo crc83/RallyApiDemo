@@ -19,7 +19,7 @@ public class ResponceHelperTestWorkspace {
 	@Before
 	public void setUp() {
 		JsonParser parser =new JsonParser();
-		JsonArray array = (JsonArray) parser.parse(TestHelper.getResourceAsReader("/workspace-responce.txt"));
+		JsonArray array = (JsonArray) parser.parse(TestHelper.getResourceAsReader("/workspace-responce.json"));
 		workspaces = ResponceHelper.fetchWorkspaces(array);
 	}
 	

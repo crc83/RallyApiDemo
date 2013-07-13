@@ -13,22 +13,33 @@ import org.sbelei.rally.domain.Type;
 class RestCalls {
 	
 	public static void main(String[] args) {
-		println("Hello")
+		println("*** start*** ")
 		RallyRestApi restApi = new RallyRestApi(new URI("https://rally1.rallydev.com"),
 				Credentials.USER,
 				Credentials.PASSWORD);
 			
-		QueryRequest request = new QueryRequest("workspace");
+		QueryRequest request = getAllWorkspacesIHaveAccessTo();
 		
 		QueryResponse queryResponse = restApi.query(request);
 		
 		println(queryResponse.getResults());
+		println("*** finish ***")
+	}
+
+	private static QueryRequest getAllWorkspacesIHaveAccessTo() {
+		QueryRequest request = new QueryRequest("workspace")
+		return request
+	}
+
+	private static QueryRequest getAllProjectsIHaveAccessTo() {
+		QueryRequest request = new QueryRequest("project")
+		return request
 	}
 
 	/*
-	 * QueryResponse queryResponse = sampleGetDefects(restApi);
+	 * QueryRequest request = = sampleGetDefects(restApi);
 	 */
-	private static QueryResponse sampleGetDefects(RallyRestApi restApi) {
+	private static QueryRequest getDefects(RallyRestApi restApi) {
 		QueryRequest request = new QueryRequest(Type.DEFECT);
 
 		request.setFetch(new Fetch("FormattedID", "Name", "State", "Priority"));
@@ -39,8 +50,7 @@ class RestCalls {
 		request.setPageSize(25);
 		request.setLimit(100);
 
-		QueryResponse queryResponse = restApi.query(request)
-		return queryResponse
+		return request
 	}
 
 }

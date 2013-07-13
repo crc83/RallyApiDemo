@@ -23,12 +23,14 @@ public class ResponceHelper {
 		    ws.id = json.string("ObjectID");
 		    ws.description = json.string("Description"); 
 		    ws.notes = json.string("Notes");
-		    for (JsonElement projectJson : json.array("Projects") ) {
-		        JsonElementWrapper jsonP = wrap(projectJson);
-		        Project project = new Project();
-		        project.name = jsonP.string("_refObjectName");
-		        project.ref = jsonP.string("_ref");
-		        ws.projects.add(project);
+		    if (json.hasNode("Projects")) {
+			    for (JsonElement projectJson : json.array("Projects") ) {
+			        JsonElementWrapper jsonP = wrap(projectJson);
+			        Project project = new Project();
+			        project.name = jsonP.string("_refObjectName");
+			        project.ref = jsonP.string("_ref");
+			        ws.projects.add(project);
+			    }
 		    }
 
 		    workspaces.add(ws);

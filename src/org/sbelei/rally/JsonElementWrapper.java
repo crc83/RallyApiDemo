@@ -30,4 +30,9 @@ public class JsonElementWrapper {
     public JsonArray array(String nodeName){
         return element(nodeName).getAsJsonArray();
     }
+
+	public boolean hasNode(String string) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

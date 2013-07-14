@@ -7,6 +7,7 @@ import com.rallydev.rest.util.Fetch
 import com.rallydev.rest.util.QueryFilter
 
 import static org.sbelei.rally.QueryHelper.*;
+import org.sbelei.rally.domain.Project
 import org.sbelei.rally.domain.State;
 import org.sbelei.rally.domain.Type;
 
@@ -18,11 +19,13 @@ class RestCalls {
 				Credentials.USER,
 				Credentials.PASSWORD);
 			
-		QueryRequest request = getAllWorkspacesIHaveAccessTo();
+		QueryRequest request = getAllProjectsIHaveAccessTo();
+		request.setWorkspace("41593629");
 		
 		QueryResponse queryResponse = restApi.query(request);
-		
-		println(queryResponse.getResults());
+		EntityProcessor.saveResponceToFile("C:/Documents and Settings/user/workspace/RallySandbox/test-resources/project-responce.json",queryResponse.getResults().toString());
+		List<Project> projects= EntityProcessor.fetchProjects(queryResponse.getResults());
+		println(projects);
 		println("*** finish ***")
 	}
 

@@ -12,7 +12,7 @@ import org.sbelei.rally.domain.Workspace;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
-public class ResponceHelperTestWorkspace {
+public class EntityProcessorWorkspaceTest {
 	
 	List<Workspace> workspaces;
 
@@ -20,7 +20,7 @@ public class ResponceHelperTestWorkspace {
 	public void setUp() {
 		JsonParser parser =new JsonParser();
 		JsonArray array = (JsonArray) parser.parse(TestHelper.getResourceAsReader("/workspace-responce.json"));
-		workspaces = ResponceHelper.fetchWorkspaces(array);
+		workspaces = EntityProcessor.fetchWorkspaces(array);
 	}
 	
 	
@@ -40,15 +40,7 @@ public class ResponceHelperTestWorkspace {
 	@Test
 	public void testFetchProjectsOfWorkspace() {
 	    List<Project> projects = workspaces.get(0).projects;
-	    assertEquals(3, projects.size());
+	    assertEquals(0, projects.size());
 	}
-	
-	@Test
-	public void testFetchProjectFields() {
-	    Project project = workspaces.get(0).projects.get(0);
-        assertEquals("https://rally1.rallydev.com/slm/webservice/1.42/project/8035573910.js",project.ref);
-        assertEquals("The project name one",project.name);
-	}
-
 
 }

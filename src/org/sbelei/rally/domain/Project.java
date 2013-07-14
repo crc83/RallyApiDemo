@@ -1,8 +1,10 @@
 package org.sbelei.rally.domain;
 
-public class Project {
+public class Project extends BasicEntity{
 
-	public String name;
-	public String ref;
+	@Override
+	public String toString() {
+		return "\n project id=" + id + "\tname=" + name + "";
+	}
 
 }

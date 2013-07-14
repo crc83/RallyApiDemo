@@ -16,13 +16,4 @@ public class QueryHelper {
 		return filter;
 	}
 
-	
-	public static QueryFilter filterByStates(String state, String... states){
-		QueryFilter filter = new QueryFilter("State", "=", state);
-		for(String theState : states) {
-			filter = filter.and(new QueryFilter("State", "=", theState));
-		}
-		return filter;
-	}
- 
 }

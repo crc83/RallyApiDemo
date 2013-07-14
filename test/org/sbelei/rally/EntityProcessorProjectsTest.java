@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.sbelei.rally.domain.Project;
-import org.sbelei.rally.domain.Workspace;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;

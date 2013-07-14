@@ -24,6 +24,7 @@ public class EntityProcessor {
 		try {
 			PrintWriter pw = new PrintWriter(fileName);
 			pw.write(responce);
+			pw.close();
 		} catch (FileNotFoundException e) {
 			log.log(Level.WARNING,"File not found",e);
 		}

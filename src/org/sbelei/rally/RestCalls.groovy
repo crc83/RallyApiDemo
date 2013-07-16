@@ -13,17 +13,31 @@ import org.sbelei.rally.domain.Type;
 
 class RestCalls {
 	
+	public static home = "C:/Documents and Settings/user/workspace/RallySandbox/test-resources";
+	
 	public static void main(String[] args) {
 		println("*** start*** ")
 		RallyRestApi restApi = new RallyRestApi(new URI("https://rally1.rallydev.com"),
 				Credentials.USER,
 				Credentials.PASSWORD);
 			
-		QueryRequest request = getAllProjectsIHaveAccessTo();
+		QueryRequest request = new QueryRequest("iteration")
+//		QueryRequest request = new QueryRequest("defect")
 		request.setWorkspace("41593629");
+//		request.setProject("9216950819");
+		QueryFilter projectFilter =new QueryFilter("Project.ObjectID", "=", "9216950819")
+		QueryFilter startDateFilter = new QueryFilter("StartDate","<=","2013-07-14T00:00:00.000Z");
+		QueryFilter endDateFilter = new QueryFilter("EndDate",">","2013-07-14T00:00:00.000Z");
+		request.setQueryFilter(projectFilter.and(startDateFilter.and(endDateFilter)))
+//		StartDate
+//		EndDate
+//			.and(new QueryFilter("State", "<", "Fixed"))		
+//			.and(new QueryFilter("Iteration.ObjectID", "=", "11597902889")
+//			
+//			))
 		
 		QueryResponse queryResponse = restApi.query(request);
-		EntityProcessor.saveResponceToFile("C:/Documents and Settings/user/workspace/RallySandbox/test-resources/project-responce.json",queryResponse.getResults().toString());
+//		EntityProcessor.saveResponceToFile("${home}/iteration-responce.json",queryResponse.getResults().toString());
 		List<Project> projects= EntityProcessor.fetchProjects(queryResponse.getResults());
 		println(projects);
 		println("*** finish ***")

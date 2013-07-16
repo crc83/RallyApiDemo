@@ -67,5 +67,21 @@ public class EntityProcessor {
 		}
 		return projects;		
 	}
+	
+	public static List<BasicEntity> fetchBasicEntities(JsonArray responce) {
+		List<BasicEntity> Entities = new ArrayList<BasicEntity>();
+		for (JsonElement rawJson : responce){
+			BasicEntity entity = new BasicEntity();
+			//populate workspace fields
+			JsonElementWrapper json = wrap(rawJson);
+			fillBasicInfo(json,prj);
+			prj.id = json.string("ObjectID");
+//		    prj.description = json.string("Description"); 
+//		    prj.notes = json.string("Notes");
+
+		    projects.add(prj);
+		}
+		return projects;		
+	}
 
 }

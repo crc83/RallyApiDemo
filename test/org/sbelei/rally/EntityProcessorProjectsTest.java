@@ -19,7 +19,7 @@ public class EntityProcessorProjectsTest {
 	public void setUp() {
 		JsonParser parser =new JsonParser();
 		JsonArray array = (JsonArray) parser.parse(TestHelper.getResourceAsReader("/project-responce.json"));
-		projects = EntityProcessor.fetchProjects(array);
+		projects = DeprecatedEntityProcessor.fetchProjects(array);
 	}
 	
 	

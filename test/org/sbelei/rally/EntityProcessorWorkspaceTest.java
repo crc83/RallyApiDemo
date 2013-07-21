@@ -20,7 +20,7 @@ public class EntityProcessorWorkspaceTest {
 	public void setUp() {
 		JsonParser parser =new JsonParser();
 		JsonArray array = (JsonArray) parser.parse(TestHelper.getResourceAsReader("/workspace-responce.json"));
-		workspaces = EntityProcessor.fetchWorkspaces(array);
+		workspaces = DeprecatedEntityProcessor.fetchWorkspaces(array);
 	}
 	
 	

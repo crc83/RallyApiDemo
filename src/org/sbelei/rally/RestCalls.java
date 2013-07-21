@@ -12,9 +12,9 @@ import com.rallydev.rest.util.Fetch;
 import com.rallydev.rest.util.QueryFilter;
 
 import static org.sbelei.rally.QueryHelper.*;
-import org.sbelei.rally.domain.Project;
-import org.sbelei.rally.domain.State;
-import org.sbelei.rally.domain.Type;
+
+import org.sbelei.rally.domain.*;
+import org.sbelei.rally.provider.*;
 
 class RestCalls {
 	
@@ -26,23 +26,9 @@ class RestCalls {
 				Credentials.USER,
 				Credentials.PASSWORD);
 			
-		QueryRequest request = new QueryRequest("iteration");
-//		QueryRequest request = new QueryRequest("defect")
-		request.setWorkspace("41593629");
-		QueryFilter projectFilter =new QueryFilter("Project.ObjectID", "=", "9216950819");
-		QueryFilter startDateFilter = new QueryFilter("StartDate","<=","2013-07-14T00:00:00.000Z");
-		QueryFilter endDateFilter = new QueryFilter("EndDate",">","2013-07-14T00:00:00.000Z");
-		request.setQueryFilter(projectFilter.and(startDateFilter.and(endDateFilter)));
-//		StartDate
-//		EndDate
-//			.and(new QueryFilter("State", "<", "Fixed"))		
-//			.and(new QueryFilter("Iteration.ObjectID", "=", "11597902889")
-//			
-//			))
-		
-		QueryResponse queryResponse = restApi.query(request);
 //		EntityProcessor.saveResponceToFile("${home}/iteration-responce.json",queryResponse.getResults().toString());
-		List<Project> projects= EntityProcessor.fetchProjects(queryResponse.getResults());
+        StoryProvider provider = new StoryProvider(restApi);
+		List<BasicEntity> projects= provider.getMyStoriesForCurrentIteration();
 		System.out.println(projects);
 		System.out.println("*** finish ***");
 	}

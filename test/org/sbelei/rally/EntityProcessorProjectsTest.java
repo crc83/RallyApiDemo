@@ -10,6 +10,7 @@ import org.sbelei.rally.domain.Project;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import static org.sbelei.rally.TestHelper.*;
 
 public class EntityProcessorProjectsTest {
 	
@@ -17,8 +18,7 @@ public class EntityProcessorProjectsTest {
 
 	@Before
 	public void setUp() {
-		JsonParser parser =new JsonParser();
-		JsonArray array = (JsonArray) parser.parse(TestHelper.getResourceAsReader("/project-responce.json"));
+		JsonArray array = getTestData("/project-responce.json");
 		projects = DeprecatedEntityProcessor.fetchProjects(array);
 	}
 	

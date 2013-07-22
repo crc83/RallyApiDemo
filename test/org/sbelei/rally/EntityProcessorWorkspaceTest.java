@@ -10,7 +10,8 @@ import org.sbelei.rally.domain.Project;
 import org.sbelei.rally.domain.Workspace;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
+
+import static org.sbelei.rally.TestHelper.*;
 
 public class EntityProcessorWorkspaceTest {
 	
@@ -18,11 +19,9 @@ public class EntityProcessorWorkspaceTest {
 
 	@Before
 	public void setUp() {
-		JsonParser parser =new JsonParser();
-		JsonArray array = (JsonArray) parser.parse(TestHelper.getResourceAsReader("/workspace-responce.json"));
+		JsonArray array = getTestData("/workspace-responce.json");
 		workspaces = DeprecatedEntityProcessor.fetchWorkspaces(array);
 	}
-	
 	
 	@Test
 	public void testFetchWorkspacesSize(){

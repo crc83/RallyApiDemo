@@ -39,7 +39,7 @@ public class IterationProvider {
 	private List<BasicEntity> fetch(QueryFilter additionalFilter) {
 	    //create request for workspace and project
         QueryRequest request = requestBuilder.newRequest(Type.ITERATION, additionalFilter);
-		//process responce and return resul
+		//process response and return result
         return processor.getEntitiesByRequest(request);
 	}
 

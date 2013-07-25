@@ -27,7 +27,6 @@ public class IterationProviderTest {
     
     @Before
     public void setUp() throws IOException {
-    	JsonArray array = getTestData("/iteration-responce.json");
     	RallyRestApi restApi = getRestApiWithResponce("/iteration-responce.json");
         iterationProvider = new IterationProvider(restApi, STUB_WORKSPACE_ID, STUB_PROJECT_ID);        
 	}

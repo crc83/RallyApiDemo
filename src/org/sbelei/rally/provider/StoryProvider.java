@@ -3,6 +3,8 @@ package org.sbelei.rally.provider;
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.request.*;
 import com.rallydev.rest.util.*;
+
+import org.sbelei.rally.Credentials;
 import org.sbelei.rally.domain.*;
 import org.sbelei.rally.jsonprocessor.*;
 
@@ -35,7 +37,11 @@ public class StoryProvider {
     }
 
     public List<BasicEntity> getMyStoriesForCurrentIteration() {
-        //QueryFilter filter = new QueryFilter("Owner","=",);
-        return fetch(null);
+        QueryFilter filter = ownerIsMe();
+        return fetch(filter);
     }
+
+	private QueryFilter ownerIsMe() {
+		return new QueryFilter("Owner","=",Credentials.USER);
+	}
 }

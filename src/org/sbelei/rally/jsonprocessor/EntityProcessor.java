@@ -59,8 +59,12 @@ public abstract class EntityProcessor<T extends BasicEntity> {
             responce = restApi.query(request);
             result = fetchBasicEntities(responce.getResults());
         } catch (IOException | NullPointerException e) {
-            log.severe("Can't fetch iteration.");
-            log.log(STACKTRACE,"Caused by:",e);
+            if ("HTTP/1.1 401 Unauthorized".equalsIgnoreCase(e.getMessage())) {
+            	log.info("Authorization failed");
+            } else {
+            	log.severe("Can't fetch iteration.");
+            	log.log(STACKTRACE,"Caused by:",e);
+            }
         }
         return result;
     }

@@ -5,7 +5,9 @@ import com.rallydev.rest.util.*;
 
 import java.util.logging.*;
 
-import static org.sbelei.rally.QueryHelper.*;
+import org.sbelei.rally.helpers.QueryRequestDecorator;
+
+import static org.sbelei.rally.helpers.FilterHelper.*;
 
 /**
  * Created by sbelei on 7/17/13.
@@ -17,24 +19,19 @@ public class BasicRequestBuilder {
     Level STACKTRACE = Level.INFO;
 
 
-    String workspaceId = "41593629";
-    String projectId = "9216950819";
+    String workspaceId;
+    String projectId;
 
 
     public QueryRequest newRequest(String type, QueryFilter filter){
-        QueryRequest request = new QueryRequest(type);
-        if (workspaceId != null) {
-            request.setWorkspace(workspaceId);
-        }
-        QueryFilter projectFilter = byProjectId(projectId);
+        QueryRequestDecorator request = new QueryRequestDecorator(type);
+        
+        request.setWorkspace(workspaceId);
 
-        //apply additional filter if aviable
-        if (filter == null){
-            request.setQueryFilter(projectFilter);
-        } else {
-            request.setQueryFilter(projectFilter.and(filter));
-        }
-        return request;
-    }
+        request.addFilter(byProjectId(projectId));
+        request.addFilter(filter);
+
+        return request.getRequest();
+    }         
 
 }

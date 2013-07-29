@@ -11,7 +11,7 @@ import com.rallydev.rest.response.QueryResponse;
 import com.rallydev.rest.util.Fetch;
 import com.rallydev.rest.util.QueryFilter;
 
-import static org.sbelei.rally.QueryHelper.*;
+import static org.sbelei.rally.helpers.FilterHelper.*;
 
 import org.sbelei.rally.domain.*;
 import org.sbelei.rally.provider.*;
@@ -27,7 +27,7 @@ class RestCalls {
 				Credentials.PASSWORD);
 			
 //		EntityProcessor.saveResponceToFile("${home}/iteration-responce.json",queryResponse.getResults().toString());
-        StoryProvider provider = new StoryProvider(restApi);
+        StoryProvider provider = new StoryProvider(restApi, "41593629", "9216950819", "11597902889");
 		List<BasicEntity> projects= provider.getMyStoriesForCurrentIteration();
 		System.out.println(projects);
 		System.out.println("*** finish ***");

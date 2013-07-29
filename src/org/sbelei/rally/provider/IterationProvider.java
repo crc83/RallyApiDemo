@@ -11,7 +11,7 @@ import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.request.QueryRequest;
 import com.rallydev.rest.util.QueryFilter;
 
-import static org.sbelei.rally.QueryHelper.*;
+import static org.sbelei.rally.helpers.FilterHelper.*;
 
 public class IterationProvider {
 

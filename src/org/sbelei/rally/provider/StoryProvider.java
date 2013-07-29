@@ -6,6 +6,7 @@ import com.rallydev.rest.util.*;
 
 import org.sbelei.rally.Credentials;
 import org.sbelei.rally.domain.*;
+import org.sbelei.rally.helpers.FilterHelper;
 import org.sbelei.rally.jsonprocessor.*;
 
 import java.util.*;
@@ -17,27 +18,27 @@ public class StoryProvider {
     BasicEntityProcessor processor;
     BasicRequestBuilder requestBuilder;
 
-    String workspaceId = "41593629";
-    String projectId = "9216950819";
-    String iterationId = "11597902889";
+    String workspaceId;
+    String projectId;
+    String iterationId;
 
 
-    public StoryProvider(RallyRestApi restApi){ //, String workspaceId, String projectId, String iterationId){
+    public StoryProvider(RallyRestApi restApi, String workspaceId, String projectId, String iterationId){
         processor = new BasicEntityProcessor(restApi);
         requestBuilder = new BasicRequestBuilder();
-//        requestBuilder.workspaceId = workspaceId;
-//        requestBuilder.projectId = projectId;
+        requestBuilder.workspaceId = workspaceId;
+        requestBuilder.projectId = projectId;
     }
 
     private List<BasicEntity> fetch(QueryFilter additionalFilter) {
         //create request for workspace and project
         QueryRequest request = requestBuilder.newRequest("hierarchicalrequirement", additionalFilter);
-        //process responce and return resul
+        //process response and return result
         return processor.getEntitiesByRequest(request);
     }
 
     public List<BasicEntity> getMyStoriesForCurrentIteration() {
-        QueryFilter filter = ownerIsMe();
+        QueryFilter filter = FilterHelper.includeByOwner(Credentials.USER);
         return fetch(filter);
     }
 

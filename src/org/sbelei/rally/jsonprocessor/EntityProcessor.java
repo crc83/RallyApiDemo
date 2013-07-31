@@ -62,7 +62,7 @@ public abstract class EntityProcessor<T extends BasicEntity> {
             if ("HTTP/1.1 401 Unauthorized".equalsIgnoreCase(e.getMessage())) {
             	log.info("Authorization failed");
             } else {
-            	log.severe("Can't fetch iteration.");
+            	log.severe("Can't fetch entities.");
             	log.log(STACKTRACE,"Caused by:",e);
             }
         }

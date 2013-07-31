@@ -27,9 +27,9 @@ class RestCalls {
 				Credentials.PASSWORD);
 			
 //		EntityProcessor.saveResponceToFile("${home}/iteration-responce.json",queryResponse.getResults().toString());
-        StoryProvider provider = new StoryProvider(restApi, "41593629", "9216950819", "11597902889");
-		List<BasicEntity> projects= provider.getMine();
-		System.out.println(projects);
+		DefectsProvider provider = new DefectsProvider(restApi, "41593629", "9216950819", "11597902889");
+		List<BasicEntity> entities= provider.getNotClosed();
+		System.out.println(entities);
 		System.out.println("*** finish ***");
 	}
 

@@ -27,11 +27,6 @@ public class IterationProvider extends BaseProvider{
 		return fetch(null);
 	}
 
-	
-	private List<BasicEntity> fetch(QueryFilter additionalFilter) {
-		return fetch(Type.ITERATION,additionalFilter);
-	}
-
     public BasicEntity getCurrentIteration(){
 	    List<BasicEntity> result = fetch(isDateInIteration(new Date()));
 	    if ((result == null) || (result.size()<1)){
@@ -39,6 +34,11 @@ public class IterationProvider extends BaseProvider{
 	    } else {
 	        return result.get(0);
 	    }
+	}
+
+	@Override
+	String getType() {
+		return Type.ITERATION;
 	}
 
 }

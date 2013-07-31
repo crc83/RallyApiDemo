@@ -21,12 +21,8 @@ public class StoryProvider extends BaseProvider{
         this.iterationId = iterationId;
     }
 
-    private List<BasicEntity> fetch(QueryFilter additionalFilter) {
-        return fetch(Type.STORY, additionalFilter);
-    }
-
-    public List<BasicEntity> getMine() {
-        QueryFilter filter = FilterHelper.includeByOwner(Credentials.USER);
-        return fetch(filter);
-    }
+	@Override
+	String getType() {
+		return Type.STORY;
+	}
 }

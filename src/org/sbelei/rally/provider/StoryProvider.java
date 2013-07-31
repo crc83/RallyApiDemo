@@ -1,5 +1,7 @@
 package org.sbelei.rally.provider;
 
+import java.util.List;
+
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.request.*;
 import com.rallydev.rest.util.*;
@@ -7,42 +9,24 @@ import com.rallydev.rest.util.*;
 import org.sbelei.rally.Credentials;
 import org.sbelei.rally.domain.*;
 import org.sbelei.rally.helpers.FilterHelper;
-import org.sbelei.rally.jsonprocessor.*;
 
-import java.util.*;
-import java.util.logging.*;
 
-public class StoryProvider {
+public class StoryProvider extends BaseProvider{
 
-    Logger log = Logger.getLogger(IterationProvider.class.getCanonicalName());
-    BasicEntityProcessor processor;
-    BasicRequestBuilder requestBuilder;
-
-    String workspaceId;
-    String projectId;
     String iterationId;
 
 
     public StoryProvider(RallyRestApi restApi, String workspaceId, String projectId, String iterationId){
-        processor = new BasicEntityProcessor(restApi);
-        requestBuilder = new BasicRequestBuilder();
-        requestBuilder.workspaceId = workspaceId;
-        requestBuilder.projectId = projectId;
+    	super(restApi, workspaceId, projectId);
+        this.iterationId = iterationId;
     }
 
     private List<BasicEntity> fetch(QueryFilter additionalFilter) {
-        //create request for workspace and project
-        QueryRequest request = requestBuilder.newRequest("hierarchicalrequirement", additionalFilter);
-        //process response and return result
-        return processor.getEntitiesByRequest(request);
+        return fetch(Type.STORY, additionalFilter);
     }
 
-    public List<BasicEntity> getMyStoriesForCurrentIteration() {
+    public List<BasicEntity> getMine() {
         QueryFilter filter = FilterHelper.includeByOwner(Credentials.USER);
         return fetch(filter);
     }
-
-	private QueryFilter ownerIsMe() {
-		return new QueryFilter("Owner","=",Credentials.USER);
-	}
 }

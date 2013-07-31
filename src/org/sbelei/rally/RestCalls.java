@@ -28,7 +28,7 @@ class RestCalls {
 			
 //		EntityProcessor.saveResponceToFile("${home}/iteration-responce.json",queryResponse.getResults().toString());
         StoryProvider provider = new StoryProvider(restApi, "41593629", "9216950819", "11597902889");
-		List<BasicEntity> projects= provider.getMyStoriesForCurrentIteration();
+		List<BasicEntity> projects= provider.getMine();
 		System.out.println(projects);
 		System.out.println("*** finish ***");
 	}

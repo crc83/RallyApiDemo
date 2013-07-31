@@ -20,16 +20,7 @@ public class DeprecatedEntityProcessor {
 	
 	private static Logger log = Logger.getLogger(DeprecatedEntityProcessor.class.getCanonicalName());
 	
-	public static void saveResponceToFile(String fileName, String responce){
-		try {
-			PrintWriter pw = new PrintWriter(fileName);
-			pw.write(responce);
-			pw.close();
-		} catch (FileNotFoundException e) {
-			log.log(Level.WARNING,"File not found",e);
-		}
-		
-	}
+
 	
 	public static List<Workspace> fetchWorkspaces(JsonArray responce) {
 		List<Workspace> workspaces = new ArrayList<Workspace>();

@@ -10,6 +10,7 @@ import java.util.logging.*;
 import com.rallydev.rest.*;
 import com.rallydev.rest.request.*;
 import com.rallydev.rest.response.*;
+
 import org.sbelei.rally.JsonElementWrapper;
 import org.sbelei.rally.domain.BasicEntity;
 
@@ -21,6 +22,9 @@ public abstract class EntityProcessor<T extends BasicEntity> {
     Level STACKTRACE = Level.INFO;
     Logger log = Logger.getLogger(EntityProcessor.class.getCanonicalName());
     RallyRestApi restApi;
+    
+    /** responses will be saved in this file if value of variable is not null or "" **/
+    public String dumpFileName;
 
     public EntityProcessor(RallyRestApi restApi) {
         this.restApi = restApi;
@@ -57,6 +61,7 @@ public abstract class EntityProcessor<T extends BasicEntity> {
         List<T> result = null;
         try {
             responce = restApi.query(request);
+            saveResponceToFile(responce.getResults().toString());
             result = fetchBasicEntities(responce.getResults());
         } catch (IOException | NullPointerException e) {
             if ("HTTP/1.1 401 Unauthorized".equalsIgnoreCase(e.getMessage())) {
@@ -68,5 +73,20 @@ public abstract class EntityProcessor<T extends BasicEntity> {
         }
         return result;
     }
+    
+	private void saveResponceToFile(String responce){
+        if (dumpFileName == null || "".equals(dumpFileName)) {
+        	return;
+        }
+		try {
+			PrintWriter pw = new PrintWriter(dumpFileName);
+			pw.write(responce);
+			pw.close();
+			log.log(Level.INFO,"Dump saved to file "+dumpFileName);
+		} catch (FileNotFoundException e) {
+			log.log(Level.WARNING,"File not found",e);
+		}
+		
+	}
 
 }

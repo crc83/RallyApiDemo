@@ -27,7 +27,8 @@ public class DefectsProvider extends BaseProvider{
 		return fetch(FilterHelper
 				.includeByOwner(Credentials.USER)
 				.and(FilterHelper
-				.includeByStates("Submitted", "Open", "In progress")));
+                        //TODO SB : Make enum of it
+				.includeByStates("Submitted", "Open", "In progress", "Closed", "Accepted")));
 	}
 	
 }

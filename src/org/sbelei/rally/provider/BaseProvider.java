@@ -24,7 +24,11 @@ public abstract class BaseProvider {
     
     BasicEntityProcessor processor;
     
-    BaseProvider(RallyRestApi restApi, String workspaceId, String projectId){
+    public void setDumpFileName(String dumpFileName) {
+    	processor.dumpFileName = dumpFileName;
+	}
+
+	BaseProvider(RallyRestApi restApi, String workspaceId, String projectId){
         this.processor = new BasicEntityProcessor(restApi);
         this.workspaceId = workspaceId;
         this.projectId = projectId;
@@ -46,9 +50,9 @@ public abstract class BaseProvider {
 
 	List<BasicEntity> fetch(QueryFilter additionalFilter) {
         QueryRequest request = newRequest(getType(), additionalFilter);
+
         return processor.getEntitiesByRequest(request);
 	}
-
 
     public List<BasicEntity> getMine() {
         QueryFilter filter = FilterHelper.includeByOwner(Credentials.USER);

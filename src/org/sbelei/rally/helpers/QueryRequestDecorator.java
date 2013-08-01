@@ -15,7 +15,7 @@ public class QueryRequestDecorator {
 		this.request = request;
 	}
 
-	public void addFilter(QueryFilter filter){
+	public void andFilter(QueryFilter filter){
 		if (request.getQueryFilter() == null ) {
 			request.setQueryFilter(filter);
 		} else {

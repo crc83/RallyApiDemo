@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.sbelei.rally.domain.*;
-import org.sbelei.rally.jsonprocessor.BasicEntityProcessor;
 
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.util.QueryFilter;
@@ -15,8 +14,7 @@ public class IterationProvider extends EntityProvider<BasicEntity>{
 
 
 	IterationProvider(RallyRestApi restApi, String workspaceId, String projectId) {
-		super(workspaceId, projectId);
-		this.processor = new BasicEntityProcessor(restApi);
+		super(restApi, workspaceId, projectId);
 	}
 
 	private QueryFilter isDateInIteration(Date date) {
@@ -41,6 +39,11 @@ public class IterationProvider extends EntityProvider<BasicEntity>{
 	@Override
 	String getType() {
 		return Type.ITERATION;
+	}
+
+	@Override
+	public BasicEntity newEntity() {
+		return new BasicEntity();
 	}
 
 }

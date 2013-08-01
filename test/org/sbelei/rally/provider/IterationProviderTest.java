@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sbelei.rally.domain.BasicEntity;
 
-import com.google.gson.JsonArray;
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.request.QueryRequest;
 import com.rallydev.rest.response.QueryResponse;

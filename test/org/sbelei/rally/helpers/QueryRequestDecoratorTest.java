@@ -24,10 +24,10 @@ public class QueryRequestDecoratorTest {
 		request.setWorkspace("42");
 		assertNull( request.getRequest().getQueryFilter() );
 		// adding null filter shouldn't add filter
-		request.addFilter(null);
+		request.andFilter(null);
 		assertNull( request.getRequest().getQueryFilter() );
 		// adding of empty filter should add filter
-		request.addFilter(new QueryFilter(null, null, null));
+		request.andFilter(new QueryFilter(null, null, null));
 		assertNotNull( request.getRequest().getQueryFilter() );
 	}
 

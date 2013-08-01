@@ -9,15 +9,17 @@ import com.rallydev.rest.util.*;
 import org.sbelei.rally.Credentials;
 import org.sbelei.rally.domain.*;
 import org.sbelei.rally.helpers.FilterHelper;
+import org.sbelei.rally.jsonprocessor.BasicEntityProcessor;
 
 
-public class StoryProvider extends BaseProvider{
+public class StoryProvider extends EntityProvider{
 
     String iterationId;
 
 
     public StoryProvider(RallyRestApi restApi, String workspaceId, String projectId, String iterationId){
-    	super(restApi, workspaceId, projectId);
+    	super(workspaceId, projectId);
+    	this.processor = new BasicEntityProcessor(restApi);
         this.iterationId = iterationId;
     }
 

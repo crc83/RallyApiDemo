@@ -29,7 +29,7 @@ class RestCalls {
 //		EntityProcessor.saveResponceToFile("${home}/iteration-responce.json",queryResponse.getResults().toString());
 		DefectsProvider provider = new DefectsProvider(restApi, "41593629", "9216950819", "11597902889");
 //		provider.setDumpFileName("E:/PROJECTS/RallyApiDemo/test-resources/defect-responce.json");
-		List<BasicEntity> entities= provider.getNotClosed();
+		List<Defect> entities= provider.getNotClosed();
 		System.out.println(entities);
 		System.out.println("*** finish ***");
 	}

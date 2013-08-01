@@ -37,7 +37,7 @@ public abstract class EntityProcessor<T extends BasicEntity> {
 		entity.id = json.string("ObjectID");
 	}
 
-	public List<T> fetchBasicEntities(JsonArray responce) {
+	public List<T> fetchEntities(JsonArray responce) {
 		List<T> entities = new ArrayList<T>();
 		for (JsonElement rawJson : responce){
 			T entity = newEntity();
@@ -49,20 +49,40 @@ public abstract class EntityProcessor<T extends BasicEntity> {
 		return entities;		
 	}
 
+	/**
+	 * Implement this method to create bean of specific type.
+	 * I.e.<br/> <code>return new Defect();</code>
+	 * @return new empty bean;
+	 */
 	public abstract T newEntity();
 
 
+	/**
+	 * Override this method if you want to provide additional mappings
+	 * between json fields and fields of your bean. I.e.<br/>
+	 * <code>entity.myFieldd = json.string("fieldA");</code> 
+	 * @param json
+	 * @param entity
+	 */
     public void fillAdditionalInfo(JsonElementWrapper json, T entity){
 
     }
 
+    /**
+     * Retrieves list of entities by request.
+     * Provider class prepares request and adds necessary filters.
+     * This class only invokes request through RestApi, 
+     * processes response and handles connection issues.
+     * @param request
+     * @return
+     */
     public List<T> getEntitiesByRequest(QueryRequest request) {
         QueryResponse responce;
         List<T> result = null;
         try {
             responce = restApi.query(request);
             saveResponceToFile(responce.getResults().toString());
-            result = fetchBasicEntities(responce.getResults());
+            result = fetchEntities(responce.getResults());
         } catch (IOException | NullPointerException e) {
             if ("HTTP/1.1 401 Unauthorized".equalsIgnoreCase(e.getMessage())) {
             	log.info("Authorization failed");
@@ -74,6 +94,10 @@ public abstract class EntityProcessor<T extends BasicEntity> {
         return result;
     }
     
+    /**
+     * Saves raw response to <code>dumpFileName</code> if it's defined.
+     * @param responce
+     */
 	private void saveResponceToFile(String responce){
         if (dumpFileName == null || "".equals(dumpFileName)) {
         	return;

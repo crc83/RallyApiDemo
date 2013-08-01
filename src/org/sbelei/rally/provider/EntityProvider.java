@@ -10,26 +10,26 @@ import org.sbelei.rally.domain.BasicEntity;
 import org.sbelei.rally.helpers.FilterHelper;
 import org.sbelei.rally.helpers.QueryRequestDecorator;
 import org.sbelei.rally.jsonprocessor.BasicEntityProcessor;
+import org.sbelei.rally.jsonprocessor.EntityProcessor;
 
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.request.QueryRequest;
 import com.rallydev.rest.util.QueryFilter;
 
-public abstract class BaseProvider {
+public abstract class EntityProvider <T extends BasicEntity>{
 	
     Logger log = Logger.getLogger(IterationProvider.class.getCanonicalName());
        
     String workspaceId;
     String projectId;
     
-    BasicEntityProcessor processor;
+    EntityProcessor<T> processor;
     
     public void setDumpFileName(String dumpFileName) {
     	processor.dumpFileName = dumpFileName;
 	}
 
-	BaseProvider(RallyRestApi restApi, String workspaceId, String projectId){
-        this.processor = new BasicEntityProcessor(restApi);
+	EntityProvider(String workspaceId, String projectId){
         this.workspaceId = workspaceId;
         this.projectId = projectId;
     }
@@ -48,13 +48,13 @@ public abstract class BaseProvider {
         return request.getRequest();
     }         
 
-	List<BasicEntity> fetch(QueryFilter additionalFilter) {
+	List<T> fetch(QueryFilter additionalFilter) {
         QueryRequest request = newRequest(getType(), additionalFilter);
 
         return processor.getEntitiesByRequest(request);
 	}
 
-    public List<BasicEntity> getMine() {
+    public List<T> getMine() {
         QueryFilter filter = FilterHelper.includeByOwner(Credentials.USER);
         return fetch(filter);
     }

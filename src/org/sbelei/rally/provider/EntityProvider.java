@@ -1,7 +1,7 @@
 package org.sbelei.rally.provider;
 
-import static org.sbelei.rally.JsonElementWrapper.wrap;
 import static org.sbelei.rally.helpers.FilterHelper.*;
+import static org.sbelei.rally.helpers.JsonElementWrapper.wrap;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.sbelei.rally.Credentials;
-import org.sbelei.rally.JsonElementWrapper;
 import org.sbelei.rally.domain.BasicEntity;
+import org.sbelei.rally.helpers.JsonElementWrapper;
 import org.sbelei.rally.helpers.QueryFilterBuilder;
 import org.sbelei.rally.helpers.QueryRequestDecorator;
 

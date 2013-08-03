@@ -1,4 +1,4 @@
-package org.sbelei.rally;
+package org.sbelei.rally.helpers;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

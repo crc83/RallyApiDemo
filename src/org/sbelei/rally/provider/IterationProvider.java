@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.sbelei.rally.domain.*;
+import org.sbelei.rally.domain.constants.Type;
 
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.util.QueryFilter;

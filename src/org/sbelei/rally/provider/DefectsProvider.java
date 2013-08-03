@@ -5,8 +5,8 @@ import java.util.List;
 import org.sbelei.rally.Credentials;
 import org.sbelei.rally.JsonElementWrapper;
 import org.sbelei.rally.domain.Defect;
-import org.sbelei.rally.domain.Type;
-import org.sbelei.rally.domain.defect.State;
+import org.sbelei.rally.domain.constants.DefectState;
+import org.sbelei.rally.domain.constants.Type;
 import org.sbelei.rally.helpers.FilterHelper;
 
 import com.rallydev.rest.RallyRestApi;
@@ -29,7 +29,7 @@ public class DefectsProvider extends EntityProvider<Defect>{
 		return fetch(FilterHelper
 				.includeByOwner(Credentials.USER)
 				.and(FilterHelper
-				.includeByStates(State.Submitted, State.Open, State.Reopened)));
+				.includeByStates(DefectState.Submitted, DefectState.Open, DefectState.Reopened)));
 	}
 
 	@Override

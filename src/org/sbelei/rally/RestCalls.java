@@ -14,7 +14,7 @@ import com.rallydev.rest.util.QueryFilter;
 import static org.sbelei.rally.helpers.FilterHelper.*;
 
 import org.sbelei.rally.domain.*;
-import org.sbelei.rally.domain.defect.State;
+import org.sbelei.rally.domain.constants.DefectState;
 import org.sbelei.rally.provider.*;
 
 class RestCalls {

@@ -3,7 +3,7 @@ package org.sbelei.rally.helpers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.sbelei.rally.domain.defect.State;
+import org.sbelei.rally.domain.constants.DefectState;
 
 import com.rallydev.rest.util.QueryFilter;
 
@@ -26,9 +26,9 @@ public class FilterHelper {
 		return getFilter("Owner.Name", EQ, owner);
 	}
 	
-	public static QueryFilter includeByStates(State state, State... states){
+	public static QueryFilter includeByStates(DefectState state, DefectState... states){
 		QueryFilter filter = getFilter("State", EQ, state.name());
-		for(State theState : states) {
+		for(DefectState theState : states) {
 			filter = filter.or(new QueryFilter("State", EQ, theState.name()));
 		}
 		return filter;

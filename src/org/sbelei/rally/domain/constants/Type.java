@@ -1,4 +1,4 @@
-package org.sbelei.rally.domain;
+package org.sbelei.rally.domain.constants;
 
 public interface Type {
 	

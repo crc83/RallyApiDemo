@@ -1,11 +1,11 @@
-package org.sbelei.rally.domain.defect;
+package org.sbelei.rally.domain.constants;
 
 /**
  * Enum with possible defect states
  * 
  * @author sbelei
  */
-public enum State {
+public enum DefectState {
 	Submitted,
 	Open,
 	Fixed,

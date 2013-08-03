@@ -21,12 +21,11 @@ class RestCalls {
 				Credentials.USER,
 				Credentials.PASSWORD);
 			
-//		StoryProvider provider = new StoryProvider(restApi, "41593629", "9216950819", "11597902889");
-//		provider.dumpFileName = "E:/PROJECTS/RallyApiDemo/test-resources/story-responce.json";
-//		List<Story> entities= provider.getMine();
-//		System.out.println(entities);
+		StoryProvider provider = new StoryProvider(restApi, "41593629", "9216950819", "11597902889");
+		provider.dumpFileName = "E:/PROJECTS/RallyApiDemo/test-resources/story-responce.json";
+		List<Story> entities= provider.onlyMine().fetch();
+		System.out.println(entities);
 		System.out.println("*** finish ***");
-		System.out.println(StoryState.In_Progress.toString());
 	}
 
 }

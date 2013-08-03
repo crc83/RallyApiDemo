@@ -6,7 +6,7 @@ import com.rallydev.rest.RallyRestApi;
 import org.sbelei.rally.JsonElementWrapper;
 import org.sbelei.rally.domain.*;
 import org.sbelei.rally.domain.constants.Type;
-
+import static org.sbelei.rally.helpers.FilterHelper.*;
 
 public class StoryProvider extends EntityProvider<Story>{
 
@@ -16,6 +16,7 @@ public class StoryProvider extends EntityProvider<Story>{
     public StoryProvider(RallyRestApi restApi, String workspaceId, String projectId, String iterationId){
     	super(restApi, workspaceId, projectId);
         this.iterationId = iterationId;
+        filters.add(byIterationId(iterationId));
     }
 
 	@Override

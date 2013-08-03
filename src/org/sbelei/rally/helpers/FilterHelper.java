@@ -34,12 +34,12 @@ public class FilterHelper {
 		return filter;
 	}
 	
+	public static QueryFilter byIterationId(String iterationId){
+		return getFilter("Iteration.ObjectID", EQ, iterationId);
+	}
+	
 	public static QueryFilter byProjectId(String projectId){
-		if (projectId == null) {
-			return null;
-		} else {
-			return new QueryFilter("Project.ObjectID", EQ, projectId);
-		}
+		return getFilter("Project.ObjectID", EQ, projectId);
 	}
 	
 	public static String queryDate(Date date){		

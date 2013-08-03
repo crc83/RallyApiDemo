@@ -1,7 +1,7 @@
 package org.sbelei.rally.provider;
 
 import static org.sbelei.rally.JsonElementWrapper.wrap;
-import static org.sbelei.rally.helpers.FilterHelper.byProjectId;
+import static org.sbelei.rally.helpers.FilterHelper.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import org.sbelei.rally.Credentials;
 import org.sbelei.rally.JsonElementWrapper;
 import org.sbelei.rally.domain.BasicEntity;
-import org.sbelei.rally.helpers.FilterHelper;
+import org.sbelei.rally.helpers.QueryFilterBuilder;
 import org.sbelei.rally.helpers.QueryRequestDecorator;
 
 import com.google.gson.JsonArray;
@@ -35,12 +35,15 @@ public abstract class EntityProvider <T extends BasicEntity>{
     String workspaceId;
     String projectId;
     RallyRestApi restApi;
+    QueryFilterBuilder filters;
 
     
-	EntityProvider(RallyRestApi restApi, String workspaceId, String projectId){
+	EntityProvider(RallyRestApi restApi, String workspaceId, String projectId){		
 		this.restApi = restApi;
         this.workspaceId = workspaceId;
         this.projectId = projectId;
+        filters = new QueryFilterBuilder();
+        filters.add(byProjectId(projectId));
     }
     
     abstract String getType();
@@ -51,7 +54,7 @@ public abstract class EntityProvider <T extends BasicEntity>{
         
         request.setWorkspace(workspaceId);
 
-        request.andFilter(byProjectId(projectId));
+        request.andFilter(filters.buildQuery());
         request.andFilter(filter);
 
         return request.getRequest();
@@ -62,10 +65,14 @@ public abstract class EntityProvider <T extends BasicEntity>{
 
         return getEntitiesByRequest(request);
 	}
+	
+	public List<T> fetch() {
+		return fetch(null);
+	}
 
-    public List<T> getMine() {
-        QueryFilter filter = FilterHelper.includeByOwner(Credentials.USER);
-        return fetch(filter);
+    public EntityProvider<T> onlyMine() {
+    	filters.add(includeByOwner(Credentials.USER));
+        return this;
     }
     
     /**

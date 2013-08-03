@@ -8,6 +8,7 @@ import org.sbelei.rally.domain.Defect;
 import org.sbelei.rally.domain.constants.DefectState;
 import org.sbelei.rally.domain.constants.Type;
 import org.sbelei.rally.helpers.FilterHelper;
+import static org.sbelei.rally.helpers.FilterHelper.*;
 
 import com.rallydev.rest.RallyRestApi;
 
@@ -17,7 +18,7 @@ public class DefectsProvider extends EntityProvider<Defect>{
 
 	public DefectsProvider(RallyRestApi restApi, String workspaceId, String projectId, String iterationId) {
 		super(restApi, workspaceId, projectId);
-		this.iterationId = iterationId;
+		filters.add(byIterationId(iterationId));
 	}
 
 	@Override
@@ -25,11 +26,8 @@ public class DefectsProvider extends EntityProvider<Defect>{
 		return Type.DEFECT;
 	}
 
-	public List<Defect> getNotClosed() {
-		return fetch(FilterHelper
-				.includeByOwner(Credentials.USER)
-				.and(FilterHelper
-				.includeByStates(DefectState.Submitted, DefectState.Open, DefectState.Reopened)));
+	public List<Defect> fetchNotClosed() {
+		return fetch(includeByStates(DefectState.Submitted, DefectState.Open, DefectState.Reopened));
 	}
 
 	@Override

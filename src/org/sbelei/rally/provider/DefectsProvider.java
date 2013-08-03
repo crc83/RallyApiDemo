@@ -6,6 +6,7 @@ import org.sbelei.rally.Credentials;
 import org.sbelei.rally.JsonElementWrapper;
 import org.sbelei.rally.domain.Defect;
 import org.sbelei.rally.domain.Type;
+import org.sbelei.rally.domain.defect.State;
 import org.sbelei.rally.helpers.FilterHelper;
 
 import com.rallydev.rest.RallyRestApi;
@@ -28,8 +29,7 @@ public class DefectsProvider extends EntityProvider<Defect>{
 		return fetch(FilterHelper
 				.includeByOwner(Credentials.USER)
 				.and(FilterHelper
-                        //TODO SB : Make enum of it
-				.includeByStates("Submitted", "Open", "In progress", "Closed", "Accepted")));
+				.includeByStates(State.Submitted, State.Open, State.Reopened)));
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import com.rallydev.rest.util.QueryFilter;
 import static org.sbelei.rally.helpers.FilterHelper.*;
 
 import org.sbelei.rally.domain.*;
+import org.sbelei.rally.domain.defect.State;
 import org.sbelei.rally.provider.*;
 
 class RestCalls {
@@ -32,33 +33,6 @@ class RestCalls {
 		List<Defect> entities= provider.getNotClosed();
 		System.out.println(entities);
 		System.out.println("*** finish ***");
-	}
-
-    private static QueryRequest getAllWorkspacesIHaveAccessTo() {
-		QueryRequest request = new QueryRequest("workspace");
-		return request;
-	}
-
-	private static QueryRequest getAllProjectsIHaveAccessTo() {
-		QueryRequest request = new QueryRequest("project");
-		return request;
-	}
-
-	/*
-	 * QueryRequest request = = sampleGetDefects(restApi);
-	 */
-	private static QueryRequest getDefects(RallyRestApi restApi) {
-		QueryRequest request = new QueryRequest(Type.DEFECT);
-
-		request.setFetch(new Fetch("FormattedID", "Name", "State", "Priority"));
-		request.setQueryFilter(includeByStates(State.SUBMITTED, State.FIXED));
-		request.setQueryFilter(includeByOwner(Credentials.USER));
-		request.setOrder("Priority ASC,FormattedID ASC");
-
-		request.setPageSize(25);
-		request.setLimit(100);
-
-		return request;
 	}
 
 }

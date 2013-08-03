@@ -2,11 +2,15 @@ package org.sbelei.rally.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.sbelei.rally.domain.defect.State;
+
 import com.rallydev.rest.util.QueryFilter;
 
 public class FilterHelper {
 	
 	private static final String EQ = "=";
+	
 	private static SimpleDateFormat FORMAT = new SimpleDateFormat("YYYY-MM-dd'T'00:00:00.000'Z'");
 	
 	private static QueryFilter getFilter(String field, String operator, String value) {
@@ -22,10 +26,10 @@ public class FilterHelper {
 		return getFilter("Owner.Name", EQ, owner);
 	}
 	
-	public static QueryFilter includeByStates(String state, String... states){
-		QueryFilter filter = getFilter("State", EQ, state);
-		for(String theState : states) {
-			filter = filter.or(new QueryFilter("State", EQ, theState));
+	public static QueryFilter includeByStates(State state, State... states){
+		QueryFilter filter = getFilter("State", EQ, state.name());
+		for(State theState : states) {
+			filter = filter.or(new QueryFilter("State", EQ, theState.name()));
 		}
 		return filter;
 	}

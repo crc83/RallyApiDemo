@@ -29,7 +29,7 @@ public class FilterHelperTest {
 	
 	@Test
 	public void testIncludeByOqner() throws Exception {
-		assertEquals(new QueryFilter("Owner.Name", "=", "the owner"), FilterHelper.includeByOwner("the owner"));
+		assertEquals(new QueryFilter("Owner.Name", "=", "the owner").toString(), FilterHelper.includeByOwner("the owner").toString());
 	}
 	
 

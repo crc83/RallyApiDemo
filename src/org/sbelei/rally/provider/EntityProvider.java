@@ -131,7 +131,7 @@ public abstract class EntityProvider <T extends BasicEntity>{
             responce = restApi.query(request);
             saveResponceToFile(responce.getResults().toString());
             result = fetchEntities(responce.getResults());
-        } catch (IOException | NullPointerException e) {
+        } catch (Exception e) {
             if ("HTTP/1.1 401 Unauthorized".equalsIgnoreCase(e.getMessage())) {
             	log.info("Authorization failed");
             } else {
@@ -148,6 +148,9 @@ public abstract class EntityProvider <T extends BasicEntity>{
      */
 	private void saveResponceToFile(String responce){
         if (dumpFileName == null || "".equals(dumpFileName)) {
+        	return;
+        }
+        if (responce == null) {
         	return;
         }
 		try {

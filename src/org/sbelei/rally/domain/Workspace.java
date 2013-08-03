@@ -10,6 +10,6 @@ public class Workspace extends BasicEntity{
     public List<Project> projects;
     
     public Workspace() {
-        projects = new ArrayList<>();
+        projects = new ArrayList<Project>();
     }
 }

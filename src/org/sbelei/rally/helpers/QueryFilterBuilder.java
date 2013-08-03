@@ -10,7 +10,7 @@ public class QueryFilterBuilder {
 	private List<QueryFilter> filters;
 	
 	public QueryFilterBuilder() {
-		filters = new ArrayList<>();
+		filters = new ArrayList<QueryFilter>();
 	}
 	
 	public void add(QueryFilter filter){

@@ -1,11 +1,7 @@
 package org.sbelei.rally;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.sbelei.rally.domain.BasicEntity;
 import org.sbelei.rally.domain.Project;
@@ -17,10 +13,6 @@ import com.google.gson.JsonElement;
 import static org.sbelei.rally.JsonElementWrapper.wrap;
 
 public class DeprecatedEntityProcessor {
-	
-	private static Logger log = Logger.getLogger(DeprecatedEntityProcessor.class.getCanonicalName());
-	
-
 	
 	public static List<Workspace> fetchWorkspaces(JsonArray responce) {
 		List<Workspace> workspaces = new ArrayList<Workspace>();

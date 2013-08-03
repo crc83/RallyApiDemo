@@ -13,4 +13,9 @@ public enum DefectState {
 	Reopened,
 	CS_Tracking,
 	T2_Verify;
+	
+	@Override
+	public String toString(){
+		return name().replaceAll("_", " ");
+	}
 }

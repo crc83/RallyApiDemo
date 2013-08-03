@@ -27,9 +27,9 @@ public class FilterHelper {
 	}
 	
 	public static QueryFilter includeByStates(DefectState state, DefectState... states){
-		QueryFilter filter = getFilter("State", EQ, state.name());
+		QueryFilter filter = getFilter("State", EQ, state.toString());
 		for(DefectState theState : states) {
-			filter = filter.or(new QueryFilter("State", EQ, theState.name()));
+			filter = filter.or(new QueryFilter("State", EQ, theState.toString()));
 		}
 		return filter;
 	}

@@ -14,7 +14,7 @@ import static org.sbelei.rally.helpers.FilterHelper.*;
 public class IterationProvider extends EntityProvider<BasicEntity>{
 
 
-	IterationProvider(RallyRestApi restApi, String workspaceId, String projectId) {
+	public IterationProvider(RallyRestApi restApi, String workspaceId, String projectId) {
 		super(restApi, workspaceId, projectId);
 	}
 
@@ -28,7 +28,7 @@ public class IterationProvider extends EntityProvider<BasicEntity>{
 		return fetch(null);
 	}
 
-    public BasicEntity getCurrentIteration(){
+    public BasicEntity fetchCurrentIteration(){
 	    List<BasicEntity> result = fetch(isDateInIteration(new Date()));
 	    if ((result == null) || (result.size()<1)){
 	        return null;

@@ -30,7 +30,7 @@ public class IterationProviderTestEmptyResponces {
     
     @Test
     public void testGetCurrentIterationForEmptyResponce() throws Exception {
-        BasicEntity oneIteration = iterationProvider.getCurrentIteration();
+        BasicEntity oneIteration = iterationProvider.fetchCurrentIteration();
         assertNull(oneIteration);
     }
     

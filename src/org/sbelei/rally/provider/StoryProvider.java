@@ -17,7 +17,7 @@ public class StoryProvider extends EntityProvider<Story>{
     public StoryProvider(RallyRestApi restApi, String workspaceId, String projectId, String iterationId){
     	super(restApi, workspaceId, projectId);
         this.iterationId = iterationId;
-        filters.add(byIterationId(iterationId));
+        filtersAdd(byIterationId(iterationId));
     }
 
 	@Override

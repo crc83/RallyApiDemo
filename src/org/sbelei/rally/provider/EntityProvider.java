@@ -4,14 +4,12 @@ import static org.sbelei.rally.helpers.FilterHelper.*;
 import static org.sbelei.rally.helpers.JsonElementWrapper.wrap;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.sbelei.rally.Credentials;
 import org.sbelei.rally.domain.BasicEntity;
 import org.sbelei.rally.helpers.JsonElementWrapper;
 import org.sbelei.rally.helpers.QueryFilterBuilder;
@@ -29,21 +27,20 @@ public abstract class EntityProvider <T extends BasicEntity>{
     /** responses will be saved in this file if value of variable is not null or "" **/
     public String dumpFileName;
 
-	Level STACKTRACE = Level.INFO;
-    Logger log = Logger.getLogger(EntityProvider.class.getCanonicalName());
+    private Level STACKTRACE = Level.INFO;
+    private Logger log = Logger.getLogger(EntityProvider.class.getCanonicalName());
        
-    String workspaceId;
-    String projectId;
-    RallyRestApi restApi;
-    QueryFilterBuilder filters;
+    private String workspaceId;
+    private RallyRestApi restApi;
+    private QueryFilterBuilder filters;
+    private String userLogin;
 
     
 	EntityProvider(RallyRestApi restApi, String workspaceId, String projectId){		
 		this.restApi = restApi;
         this.workspaceId = workspaceId;
-        this.projectId = projectId;
         filters = new QueryFilterBuilder();
-        filters.add(byProjectId(projectId));
+        filtersAdd(byProjectId(projectId));
     }
     
     abstract String getType();
@@ -71,8 +68,12 @@ public abstract class EntityProvider <T extends BasicEntity>{
 	}
 
     public EntityProvider<T> onlyMine() {
-    	filters.add(includeByOwner(Credentials.USER));
+    	filters.add(includeByOwner(userLogin));
         return this;
+    }
+    
+    public void filtersAdd(QueryFilter filter){
+    	filters.add(filter);
     }
     
     /**
@@ -162,6 +163,10 @@ public abstract class EntityProvider <T extends BasicEntity>{
 			log.log(Level.WARNING,"File not found",e);
 		}
 		
+	}
+
+	public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
 	}
 
 }

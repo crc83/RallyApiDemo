@@ -2,11 +2,9 @@ package org.sbelei.rally.provider;
 
 import java.util.List;
 
-import org.sbelei.rally.Credentials;
 import org.sbelei.rally.domain.Defect;
 import org.sbelei.rally.domain.constants.DefectState;
 import org.sbelei.rally.domain.constants.Type;
-import org.sbelei.rally.helpers.FilterHelper;
 import org.sbelei.rally.helpers.JsonElementWrapper;
 
 import static org.sbelei.rally.helpers.FilterHelper.*;
@@ -19,7 +17,7 @@ public class DefectsProvider extends EntityProvider<Defect>{
 
 	public DefectsProvider(RallyRestApi restApi, String workspaceId, String projectId, String iterationId) {
 		super(restApi, workspaceId, projectId);
-		filters.add(byIterationId(iterationId));
+		filtersAdd(byIterationId(iterationId));
 	}
 
 	@Override

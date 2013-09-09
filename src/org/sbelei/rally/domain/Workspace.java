@@ -12,4 +12,10 @@ public class Workspace extends BasicEntity{
     public Workspace() {
         projects = new ArrayList<Project>();
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

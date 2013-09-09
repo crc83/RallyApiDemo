@@ -10,8 +10,7 @@ public class Story extends BasicEntity{
 	
 	@Override
 	public String toString() {
-		return "\nStory\n\tformattedId=" + formattedId + "\nscheduleState="
-				+ scheduleState + "\nname=" + name + "\nref=" + ref;
+		return name;
 	}
 
 	/**

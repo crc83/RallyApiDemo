@@ -47,4 +47,7 @@ public class Defect extends BasicEntity{
 		}
 	};
 
+    public String getPriorityShort() {
+        return priorities.get(priority);
+    }
 }

@@ -126,10 +126,9 @@ public abstract class EntityProvider <T extends BasicEntity>{
      * @return
      */
     public List<T> getEntitiesByRequest(QueryRequest request) {
-        QueryResponse responce;
-        List<T> result = null;
+        List<T> result = new ArrayList<T>();//to get rid of npe checks in api consumers
         try {
-            responce = restApi.query(request);
+            QueryResponse responce = restApi.query(request);
             saveResponceToFile(responce.getResults().toString());
             result = fetchEntities(responce.getResults());
         } catch (Exception e) {

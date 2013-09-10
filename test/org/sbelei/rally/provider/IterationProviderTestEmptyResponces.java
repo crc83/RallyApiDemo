@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.sbelei.rally.domain.BasicEntity;
 
 import com.rallydev.rest.RallyRestApi;
+import org.sbelei.rally.domain.Iteration;
 
 /**
  * Test IterationProvider to work with empty responses
@@ -36,7 +37,7 @@ public class IterationProviderTestEmptyResponces {
     
     @Test
     public void testGetIteration() throws Exception {
-        List<BasicEntity> iterations = iterationProvider.getIterations();
+        List<Iteration> iterations = iterationProvider.getIterations();
         assertNull(iterations);
     }
 }

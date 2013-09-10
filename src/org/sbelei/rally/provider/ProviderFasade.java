@@ -3,11 +3,7 @@ package org.sbelei.rally.provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sbelei.rally.domain.BasicEntity;
-import org.sbelei.rally.domain.Defect;
-import org.sbelei.rally.domain.Project;
-import org.sbelei.rally.domain.Story;
-import org.sbelei.rally.domain.Workspace;
+import org.sbelei.rally.domain.*;
 
 import com.rallydev.rest.RallyRestApi;
 
@@ -36,7 +32,7 @@ public class ProviderFasade {
 		return pprovider.fetch();
 	}
 	
-	public List<BasicEntity> fetchIterations() {
+	public List<Iteration> fetchIterations() {
 		IterationProvider iprovider = new IterationProvider(restApi,workspaceId,projectId);
 		return iprovider.fetch();		
 	}

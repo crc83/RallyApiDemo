@@ -14,6 +14,7 @@ import org.sbelei.rally.domain.BasicEntity;
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.request.QueryRequest;
 import com.rallydev.rest.response.QueryResponse;
+import org.sbelei.rally.domain.Iteration;
 
 import static org.mockito.Mockito.*;
 import static org.sbelei.rally.TestHelper.*;
@@ -38,7 +39,7 @@ public class IterationProviderTest {
      * @throws Exception
      */
 	public void testGetIterations() throws Exception {
-		List<BasicEntity> iterations = iterationProvider.getIterations();
+		List<Iteration> iterations = iterationProvider.getIterations();
 		assertEquals(3, iterations.size());
 		assertEquals("Iteration A", iterations.get(0).name);
 	}
@@ -46,9 +47,9 @@ public class IterationProviderTest {
 	private static RallyRestApi getRestApiWithResponce(String responcePath)
 			throws IOException {
 		RallyRestApi restApi = mock(RallyRestApi.class);
-		String responceMessage = getResourseAsString(responcePath);
-		QueryResponse stubResponce = new QueryResponse(responceMessage);
-		stub(restApi.query(any(QueryRequest.class))).toReturn(stubResponce);
+		String responseMessage = getResourseAsString(responcePath);
+		QueryResponse stubResponse = new QueryResponse(responseMessage);
+		stub(restApi.query(any(QueryRequest.class))).toReturn(stubResponse);
 		return restApi;
 	}
     

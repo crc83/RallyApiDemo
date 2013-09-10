@@ -11,7 +11,7 @@ import com.rallydev.rest.util.QueryFilter;
 
 import static org.sbelei.rally.helpers.FilterHelper.*;
 
-public class IterationProvider extends EntityProvider<BasicEntity>{
+public class IterationProvider extends EntityProvider<Iteration>{
 
 
 	public IterationProvider(RallyRestApi restApi, String workspaceId, String projectId) {
@@ -24,12 +24,12 @@ public class IterationProvider extends EntityProvider<BasicEntity>{
 		return  startDateFilter.and(endDateFilter);
 	}
 	
-	public List<BasicEntity> getIterations(){
+	public List<Iteration> getIterations(){
 		return fetch(null);
 	}
 
-    public BasicEntity fetchCurrentIteration(){
-	    List<BasicEntity> result = fetch(isDateInIteration(new Date()));
+    public Iteration fetchCurrentIteration(){
+	    List<Iteration> result = fetch(isDateInIteration(new Date()));
 	    if ((result == null) || (result.size()<1)){
 	        return null;
 	    } else {
@@ -43,8 +43,8 @@ public class IterationProvider extends EntityProvider<BasicEntity>{
 	}
 
 	@Override
-	public BasicEntity newEntity() {
-		return new BasicEntity();
+	public Iteration newEntity() {
+		return new Iteration();
 	}
 
 }

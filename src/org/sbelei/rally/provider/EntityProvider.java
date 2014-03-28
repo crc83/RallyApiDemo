@@ -54,7 +54,9 @@ public abstract class EntityProvider <T extends BasicEntity>{
         request.andFilter(filters.buildQuery());
         request.andFilter(filter);
 
-        return request.getRequest();
+        QueryRequest request1 = request.getRequest();
+        request1.setOrder("Name");
+        return request1;
     }         
 
 	List<T> fetch(QueryFilter additionalFilter) {
@@ -128,9 +130,17 @@ public abstract class EntityProvider <T extends BasicEntity>{
     public List<T> getEntitiesByRequest(QueryRequest request) {
         List<T> result = new ArrayList<T>();//to get rid of npe checks in api consumers
         try {
-            QueryResponse responce = restApi.query(request);
-            saveResponceToFile(responce.getResults().toString());
-            result = fetchEntities(responce.getResults());
+            while(true) {
+                QueryResponse responce = restApi.query(request);
+
+                saveResponceToFile(responce.getResults().toString());
+                result.addAll(fetchEntities(responce.getResults()));
+                if( result.size() < responce.getTotalResultCount()) {
+                    request.setStart(responce.getResults().size());
+                } else {
+                    break;
+                }
+            }
         } catch (Exception e) {
             if ("HTTP/1.1 401 Unauthorized".equalsIgnoreCase(e.getMessage())) {
             	log.info("Authorization failed");

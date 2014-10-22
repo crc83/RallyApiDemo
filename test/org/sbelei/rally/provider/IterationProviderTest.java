@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.sbelei.rally.domain.BasicEntity;
 
 import com.rallydev.rest.RallyRestApi;
 import com.rallydev.rest.request.QueryRequest;
@@ -28,14 +27,15 @@ public class IterationProviderTest {
     
     @Before
     public void setUp() throws IOException {
-    	RallyRestApi restApi = getRestApiWithResponce("/iteration-responce.json");
+    	RallyRestApi restApi = getRestApiWithResponse("/iteration-responce.json");
         iterationProvider = new IterationProvider(restApi, STUB_WORKSPACE_ID, STUB_PROJECT_ID);        
 	}
     
     @Test
     @Ignore
     /**
-     * Something wrong with stubbed responces
+     * Something wrong with stubbed responses
+     * java.lang.ClassCastException: com.google.gson.JsonArray cannot be cast to com.google.gson.JsonObject
      * @throws Exception
      */
 	public void testGetIterations() throws Exception {
@@ -44,10 +44,10 @@ public class IterationProviderTest {
 		assertEquals("Iteration A", iterations.get(0).name);
 	}
 
-	private static RallyRestApi getRestApiWithResponce(String responcePath)
+	private static RallyRestApi getRestApiWithResponse(String responsePath)
 			throws IOException {
 		RallyRestApi restApi = mock(RallyRestApi.class);
-		String responseMessage = getResourseAsString(responcePath);
+		String responseMessage = getResourseAsString(responsePath);
 		QueryResponse stubResponse = new QueryResponse(responseMessage);
 		stub(restApi.query(any(QueryRequest.class))).toReturn(stubResponse);
 		return restApi;

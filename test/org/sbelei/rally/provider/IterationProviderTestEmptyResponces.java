@@ -38,6 +38,7 @@ public class IterationProviderTestEmptyResponces {
     @Test
     public void testGetIteration() throws Exception {
         List<Iteration> iterations = iterationProvider.getIterations();
-        assertNull(iterations);
+        assertNotNull(iterations);
+        assertEquals(0, iterations.size());
     }
 }

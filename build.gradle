@@ -44,21 +44,42 @@ sourceSets {
     }
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    baseName = jar.baseName
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    baseName = jar.baseName
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+javadoc.failOnError = false
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'org.belei'
+            groupId = 'org.sbelei'
             artifactId = 'rally-api-helper'
             version = '1.1'
 
             from components.java
+            artifact sourcesJar {
+                classifier "source"
+            }
         }
     }
 }
 
 bintray {
     user = 'crc83'
-    key = '6d756293cc71c4e6e6ea1120e28254749aee02c8b7c1afbe97087f3984c23d84'
+    key = bintrayApiKey
     publications = ['mavenJava']
     pkg {
         repo = 'maven'

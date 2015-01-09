@@ -28,7 +28,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="module-library">
       <library name="rally-rest-api-1.0.7.jar">
         <CLASSES>
@@ -130,16 +130,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="commons-lang3-3.0.1.jar">
-        <CLASSES>
-          <root url="file://lib/commons-lang3-3.0.1.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="groovy-2.1.7" level="application" />
   </component>
 </module>
-

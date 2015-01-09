@@ -14,6 +14,7 @@ repositories {
 apply plugin: 'bintray'
 apply plugin: 'java'
 apply plugin: 'maven-publish'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -84,6 +85,7 @@ publishing {
     }
 }
 
+def bintrayApiKey ='NA'
 bintray {
     user = 'crc83'
     key = bintrayApiKey

@@ -1,6 +1,7 @@
 rally-api-helper
 ================
-[![Build Status](https://buildhive.cloudbees.com/job/crc83/job/rally-api-helper/badge/icon)](https://buildhive.cloudbees.com/job/crc83/job/rally-api-helper/)
+
+*PROJECT IS OUTDATED. NOT SURE IF IT WORKS WITH LATEST API*
 
 This project contains api that will help work easier with RallyApi.
 
